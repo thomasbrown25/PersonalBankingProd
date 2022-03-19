@@ -3,7 +3,7 @@ const { Configuration, PlaidApi, PlaidEnvironments } = require("plaid");
 const router = express.Router();
 const mongoose = require("mongoose");
 const auth = require('../../middleware/auth');
-
+const moment = require('moment'); 
 
 //Models
 const User = require("../../models/User");
@@ -75,7 +75,6 @@ router.post("/public_token_exchange", auth, async (req, res) => {
 	console.log(`finding user with email: ${email}`)
 	//save access token to user
 	try {
-
 		const user = await User.findOne({ _id: req.user.id })
 
 		if (!user) {
@@ -104,6 +103,48 @@ router.post("/public_token_exchange", auth, async (req, res) => {
 
 	//return res.status(404).send("no user find by email");
 });
+
+
+
+// @route POST api/plaid/transactions/get
+// @desc Creates a Link token
+// @access Private
+router.post("/transactions/get", auth, async (req, res) => {
+
+	const { accessToken } = req.body;
+
+	// Create the public_token with all of your configurations
+	await client.transactionsGet({
+		access_token: req.user.accessToken,
+		start_date: moment(),
+		end_date: moment().subtract(30, 'days')
+	})
+	.then((resp) => {
+		console.log(`got transaction data`)
+		return res.status(200).send({ transactions: resp.data });
+	})
+	.catch((e) => {
+		// Get error status code and error message from Plaid server
+		// Display error on client
+		console.log(e.response.config.data)
+		return res.status(e.response.status).send({ error: e.response.data.error_message });
+	})
+		
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // @route POST api/plaid/create_public_token

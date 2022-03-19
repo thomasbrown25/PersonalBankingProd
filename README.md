@@ -1,4 +1,4 @@
-# DevConnector 2.0
+# Personal Financing App
 
 > Social network for developers
 
