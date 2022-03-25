@@ -15,9 +15,10 @@ const dummyData = [
 ]
 
 const Transactions = ({ transactions, title }) => {
-  transactions = dummyData;
+  let transactionTable;
 
-  const transactionTable = transactions.map((exp) => (
+  if (transactions) 
+   transactionTable = transactions.map((exp) => (
     <tr key={exp._id}>
       <td>{exp.amount}</td>
       <td>{exp.description}</td>

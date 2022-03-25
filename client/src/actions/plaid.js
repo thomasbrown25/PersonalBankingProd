@@ -24,7 +24,6 @@ export const createLinkToken = () => async (dispatch) => {
 export const publicTokenExchange = (publicToken, email) => async (dispatch) => {
 	await api.post("/plaid/public_token_exchange", { publicToken, email })
 		.then((res) => {
-			console.table(res.data);
 
 			dispatch({
 				type: USER_LOADED,
@@ -52,3 +51,5 @@ export const createSandboxToken = () => async (dispatch) => {
 			  });
 		})
 };
+
+

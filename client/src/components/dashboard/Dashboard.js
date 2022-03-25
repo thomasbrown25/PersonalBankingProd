@@ -8,12 +8,12 @@ import Education from './Education';
 import PlaidLinkToken from './PlaidLinkToken';
 
 //Actions
-import { createLinkToken } from "../../actions/plaid";
-import { getCurrentProfile, deleteAccount } from '../../actions/profile';
+import { createLinkToken  } from "../../actions/plaid";
+import { getCurrentProfile, getTransactions } from '../../actions/profile';
 
 const Dashboard = ({
   getCurrentProfile,
-  deleteAccount,
+  getTransactions,
   auth: { user },
   profile: { profile },
   plaid: { linkToken, publicToken },
@@ -21,10 +21,13 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, [getCurrentProfile]);
+  }, getCurrentProfile);
   useEffect(() => {
 		createLinkToken();
-	}, [createLinkToken]);
+	}, createLinkToken);
+  useEffect(() => {
+    getTransactions();
+  }, getTransactions)
 
   return (
     <section className="container">
@@ -35,7 +38,6 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <>
-          <DashboardActions />
           <Transactions title={'Recent Transactions'} transactions={profile.transactions} />
         </>
       ) : (
@@ -52,7 +54,7 @@ const Dashboard = ({
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  deleteAccount: PropTypes.func.isRequired,
+  getTransactions: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   plaid: PropTypes.object.isRequired,
@@ -65,6 +67,6 @@ const mapStateToProps = (state) => ({
   plaid: state.plaid
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, createLinkToken })(
+export default connect(mapStateToProps, { getCurrentProfile, getTransactions, createLinkToken })(
   Dashboard
 );

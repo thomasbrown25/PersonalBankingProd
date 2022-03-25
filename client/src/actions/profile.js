@@ -9,7 +9,8 @@ import {
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
   GET_REPOS,
-  NO_REPOS
+  NO_REPOS,
+  GET_TRANSACTIONS_ERROR
 } from './types';
 
 /*
@@ -230,4 +231,24 @@ export const deleteAccount = () => async (dispatch) => {
       });
     }
   }
+};
+
+
+// Get Transactions, save them to user's profile and updates the frontend with new transactions
+export const getTransactions = () => async (dispatch) => {
+	await api.post("/plaid/transactions/get")
+		.then((res) => {
+
+			dispatch({
+				type: UPDATE_PROFILE,
+				payload: res.data,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			dispatch({
+				type: PROFILE_ERROR,
+				payload: { msg: err.response.statusText, status: err.response }
+			  });
+		})
 };

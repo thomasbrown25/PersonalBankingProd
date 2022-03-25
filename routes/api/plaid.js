@@ -3,10 +3,12 @@ const { Configuration, PlaidApi, PlaidEnvironments } = require("plaid");
 const router = express.Router();
 const mongoose = require("mongoose");
 const auth = require('../../middleware/auth');
+const checkAccess = require('../../middleware/checkAccess');
 const moment = require('moment'); 
 
 //Models
 const User = require("../../models/User");
+const Profile = require("../../models/Profile");
 
 
 const configuration = new Configuration({
@@ -109,19 +111,44 @@ router.post("/public_token_exchange", auth, async (req, res) => {
 // @route POST api/plaid/transactions/get
 // @desc Creates a Link token
 // @access Private
-router.post("/transactions/get", auth, async (req, res) => {
-
-	const { accessToken } = req.body;
+router.post("/transactions/get", auth, checkAccess, async (req, res) => {
 
 	// Create the public_token with all of your configurations
 	await client.transactionsGet({
 		access_token: req.user.accessToken,
-		start_date: moment(),
-		end_date: moment().subtract(30, 'days')
+		start_date: moment().subtract(30, 'days').format('YYYY-MM-DD'),
+		end_date:  moment().format('YYYY-MM-DD')
 	})
-	.then((resp) => {
-		console.log(`got transaction data`)
-		return res.status(200).send({ transactions: resp.data });
+	.then((response) => {
+		 Profile.findOne({ user: req.user.id }).then((profile) => {
+			if (!profile)
+			return res.status(500).send({ error: `user doesn't have a profile` });
+
+			let transactions = [];
+			response.data.transactions.forEach(transaction => {
+				tran = {
+					amount: transaction.amount,
+					description: transaction.name,
+					category: transaction.category,
+					date: transaction.date
+				}
+				transactions.push(tran);
+			});
+
+			profile.transactions = transactions;
+			transactions = null; // clear object to optimize memory
+
+			profile.save().then((savedProfile) => {
+				return res.status(200).send(savedProfile);
+			}).catch((e) => {
+				console.log(e)
+				return res.status(500).send({ error: e.message });
+			})			
+		})
+		.catch((e) => {
+			console.log(e)
+			return res.status(500).send({ error: e.message });
+		})
 	})
 	.catch((e) => {
 		// Get error status code and error message from Plaid server
