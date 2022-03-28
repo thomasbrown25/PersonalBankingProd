@@ -90,10 +90,10 @@ const ProfileSchema = new mongoose.Schema({
   transactions: [
     {
       amount: {
-        type: String,
+        type: Number,
         required: true
       },
-      description: {
+      name: {
         type: String,
         required: true
       },

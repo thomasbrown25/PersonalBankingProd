@@ -16,7 +16,7 @@ const Dashboard = ({
   getTransactions,
   auth: { user },
   profile: { profile },
-  plaid: { linkToken, publicToken },
+  plaid: { linkToken },
   createLinkToken
 }) => {
   useEffect(() => {

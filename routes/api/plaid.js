@@ -117,7 +117,7 @@ router.post("/transactions/get", auth, checkAccess, async (req, res) => {
 	await client.transactionsGet({
 		access_token: req.user.accessToken,
 		start_date: moment().subtract(30, 'days').format('YYYY-MM-DD'),
-		end_date:  moment().format('YYYY-MM-DD')
+		end_date: moment().format('YYYY-MM-DD')
 	})
 	.then((response) => {
 		 Profile.findOne({ user: req.user.id }).then((profile) => {
@@ -128,7 +128,7 @@ router.post("/transactions/get", auth, checkAccess, async (req, res) => {
 			response.data.transactions.forEach(transaction => {
 				tran = {
 					amount: transaction.amount,
-					description: transaction.name,
+					name: transaction.name,
 					category: transaction.category,
 					date: transaction.date
 				}
