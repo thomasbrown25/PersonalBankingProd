@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteExpenses } from '../../actions/profile';
-import formatDate from '../../utils/formatDate';
-import currency from '../../utils/currency';
+//import formatDate from '../../utils/formatDate';
+//import currency from '../../utils/currency';
 
 // Table import
 import Table from '@mui/material/Table';

@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import DashboardActions from './DashboardActions';
 import Transactions from './Transactions';
-import Education from './Education';
 import PlaidLinkToken from './PlaidLinkToken';
 import ErrorBoundary from '../../utils/ErrorBoundary'
 
@@ -32,7 +30,7 @@ const Dashboard = ({
 
   return (
     <section className="container">
-      <PlaidLinkToken linkToken={linkToken} />
+      {/* <PlaidLinkToken linkToken={linkToken} /> */}
       <h1 className="large text-primary">Dashboard</h1>
       <p className="lead">
         <i className="fas fa-user" /> Welcome {user && user.name}

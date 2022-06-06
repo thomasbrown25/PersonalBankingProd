@@ -9,8 +9,7 @@ import {
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
   GET_REPOS,
-  NO_REPOS,
-  GET_TRANSACTIONS_ERROR
+  NO_REPOS
 } from './types';
 
 /*
