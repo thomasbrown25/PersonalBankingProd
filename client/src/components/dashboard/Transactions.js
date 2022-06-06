@@ -36,8 +36,8 @@ const Transactions = ({ transactions, title }) => {
       <TableCell component="th" scope="row">
         {tran.date}
       </TableCell>
-      <TableCell align="right">{tran.name}</TableCell>
-      <TableCell align="right">{tran.category}</TableCell>
+      <TableCell align="left">{tran.name}</TableCell>
+      <TableCell align="left">{tran.category}</TableCell>
       <TableCell align="right">{tran.amount}</TableCell>
     </TableRow>
   ));
@@ -49,8 +49,8 @@ const Transactions = ({ transactions, title }) => {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Category</TableCell>
+            <TableCell align="left">Name</TableCell>
+            <TableCell align="left">Category</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
