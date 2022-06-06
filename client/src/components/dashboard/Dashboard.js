@@ -6,6 +6,7 @@ import DashboardActions from './DashboardActions';
 import Transactions from './Transactions';
 import Education from './Education';
 import PlaidLinkToken from './PlaidLinkToken';
+import ErrorBoundary from '../../utils/ErrorBoundary'
 
 //Actions
 import { createLinkToken  } from "../../actions/plaid";
@@ -38,7 +39,9 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <>
+        <ErrorBoundary>
           <Transactions title={'Recent Transactions'} transactions={profile.transactions} />
+          </ErrorBoundary>
         </>
       ) : (
         <>

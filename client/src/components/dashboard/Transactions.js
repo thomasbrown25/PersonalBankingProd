@@ -72,40 +72,4 @@ Transactions.propTypes = {
 export default connect(null, { })(Transactions);
 
 
-  /* 
   
-  
-    let transactionTable;
-
-  if (transactions) 
-   transactionTable = transactions.map((tran) => (
-    <tr key={tran._id}>
-      <td>
-        {formatDate(tran.date)}
-      </td>
-      <td>{tran.name}</td>
-      <td>{tran.category}</td>
-      <td>{currency.format(tran.amount)}</td>
-    </tr>
-  ));
-  
-  
-  
-  
-  
-  
-  
-  
-  <h2 className="my-2">{title}</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th className="hide-sm">Date</th>
-            <th className="hide-sm">Name</th>
-            <th className="hide-sm">Category</th>
-            <th>Amount</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>{transactionTable}</tbody>
-      </table> */
