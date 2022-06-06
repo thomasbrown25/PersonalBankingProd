@@ -46,12 +46,14 @@ const SideNavbar = ({ auth: { isAuthenticated }, logout }) => {
 
   const SideBar = (
     <ProSidebar>
+      <a href ="https://placeholder.com/"><img src="https://via.placeholder.com/150x50"/></a>
+            Financing App
     <Menu iconShape="square">
-      <MenuItem icon={<FontAwesomeIcon icon="check-square" />}>Dashboard</MenuItem>
-      <SubMenu title="Components" icon={<FontAwesomeIcon icon="heart" />}>
-        <MenuItem>Component 1</MenuItem>
-        <MenuItem>Component 2</MenuItem>
-      </SubMenu>
+    <MenuItem icon={<FontAwesomeIcon icon="check-square" />}>Dashboard <Link to="/dashboard"/></MenuItem>
+    <MenuItem icon={<FontAwesomeIcon icon="check-square" />}>Recurring <Link to="/"/></MenuItem>
+    <MenuItem icon={<FontAwesomeIcon icon="check-square" />}>Spending <Link to="/"/></MenuItem>
+    <MenuItem icon={<FontAwesomeIcon icon="check-square" />}>Net Worth <Link to="/"/></MenuItem>
+    <MenuItem icon={<FontAwesomeIcon icon="check-square" />}>Transactions <Link to="/"/></MenuItem>
     </Menu>
   </ProSidebar>
   );

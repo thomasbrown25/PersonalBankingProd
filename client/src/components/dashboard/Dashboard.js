@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Transactions from './Transactions';
 import PlaidLinkToken from './PlaidLinkToken';
+import SideNavbar from '../layout/SideNavbar';
 import ErrorBoundary from '../../utils/ErrorBoundary'
 
 //Actions
@@ -30,6 +31,7 @@ const Dashboard = ({
 
   return (
     <section className="container">
+      <SideNavbar />
       {/* <PlaidLinkToken linkToken={linkToken} /> */}
       <h1 className="large text-primary">Dashboard</h1>
       <p className="lead">

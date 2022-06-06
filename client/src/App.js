@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
-import SideNavbar from './components/layout/SideNavbar';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -47,7 +46,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <SideNavbar />
         <Alert />
         <Routes>
           <Route path="/" element={<Landing />} />
